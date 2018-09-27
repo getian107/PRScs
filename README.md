@@ -19,32 +19,32 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 `
 python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --CHROM=CHROM]
 `
- - PATH_TO_REFERENCE: Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
+ - PATH_TO_REFERENCE (required): Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
 
- - VALIDATION_BIM_PREFIX: Full path and the prefix of the bim file for the validation set. 
+ - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the validation set. 
 
- - SUM_STATS_FILE: Full path and the file name of the GWAS summary statistics.
-                   Summary statistics file must have the following format:
+ - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. Summary statistics file must have the following format:
 
 ```
-                   SNP          A1   A2   BETA      P
-                   rs4970383    C    A    -0.0064   4.7780e-01
-                   rs4475691    C    T    -0.0145   1.2450e-01
-                   rs13302982   A    G    -0.0232   2.4290e-01
-                   ...
+    SNP          A1   A2   BETA      P
+    rs4970383    C    A    -0.0064   4.7780e-01
+    rs4475691    C    T    -0.0145   1.2450e-01
+    rs13302982   A    G    -0.0232   2.4290e-01
+    ...
 ```
-                Or:
+Or:
 ```
-                   SNP          A1   A2   OR        P
-                   rs4970383    A    C    0.9825    0.5737                 
-                   rs4475691    T    C    0.9436    0.0691
-                   rs13302982   A    G    1.1337    0.0209
-                   ...
+    SNP          A1   A2   OR        P
+    rs4970383    A    C    0.9825    0.5737                 
+    rs4475691    T    C    0.9436    0.0691
+    rs13302982   A    G    1.1337    0.0209
+    ...
 ```
+where SNP is the rs id, A1 is the reference/effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the reference allele, P is the p-value of the effect
 
- - GWAS_SAMPLE_SIZE: Sample size of the GWAS.
+ - GWAS_SAMPLE_SIZE (required): Sample size of the GWAS.
 
- - OUTPUT_DIR: Output directory of the posterior effect size estimates.
+ - OUTPUT_DIR (required): Output directory of the posterior effect size estimates.
 
  - PARAM_A (optional): Parameter a in the gamma-gamma prior. Default is 1.
 
