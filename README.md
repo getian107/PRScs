@@ -27,11 +27,11 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
                    Summary statistics file must have the following format: <br />
 
 `
-                   SNP          A1   A2   BETA      P  
-                   rs4970383    C    A    -0.0064   4.7780e-01  
-                   rs4475691    C    T    -0.0145   1.2450e-01  
-                   rs13302982   A    G    -0.0232   2.4290e-01  
-                   ...
+                   SNP          A1   A2   BETA      P <br />
+                   rs4970383    C    A    -0.0064   4.7780e-01 <br />
+                   rs4475691    C    T    -0.0145   1.2450e-01 <br />
+                   rs13302982   A    G    -0.0232   2.4290e-01 <br />
+                   ... <br />
 `
                 Or:
 `
