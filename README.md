@@ -25,6 +25,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 
  - SUM_STATS_FILE: Full path and the file name of the GWAS summary statistics.
                    Summary statistics file must have the following format:
+
 `
                    SNP          A1   A2   BETA      P
                    rs4970383    C    A    -0.0064   4.7780e-01
@@ -40,6 +41,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
                    rs13302982   A    G    1.1337    0.0209
                    ...
 `
+
  - GWAS_SAMPLE_SIZE: Sample size of the GWAS.
 
  - OUTPUT_DIR: Output directory of the posterior effect size estimates.
