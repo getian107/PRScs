@@ -38,8 +38,25 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
                    rs4970383    A    C    0.9825    0.5737                 
                    rs4475691    T    C    0.9436    0.0691
                    rs13302982   A    G    1.1337    0.0209
+                   ...
 `
+ - GWAS_SAMPLE_SIZE: Sample size of the GWAS.
 
+ - OUTPUT_DIR: Output directory of the posterior effect size estimates.
+
+ - PARAM_A (optional): Parameter a in the gamma-gamma prior. Default is 1.
+
+ - PARAM_B (optional): Parameter b in the gamma-gamma prior. Default is 0.5.
+
+ - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a full Bayesian approach. This usually works well for polygenic traits in real applications. For ultra-sparse genetic architectures, fixing phi to a small number may have improved prediction accuracy.
+
+ - MCMC_ITERATIONS (optional): Total number of MCMC iterations. Default is 1,000.
+
+ - MCMC_BURNIN (optional): Number of burnin iterations. Default is 500.
+
+ - MCMC_THINNING_FACTOR (optional): Thinning of the Markov chain. Default is 5.
+
+ - CHROM (optional): The chromosome on which the model is fitted. Useful for parallel computation. Default is iterating through 22 autosomes.
 
 
 ## Support
