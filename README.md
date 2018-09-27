@@ -7,8 +7,19 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Getting Started
 
+You can use clone this repository using the following git command:
 
+`git clone https://github.com/getian107/PRScs.git`
 
+Alternatively, you can download the source files from github website (`https://github.com/getian107/PRScs`)
+
+PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
+ 
+Once Python dependencies have been installed, you can run
+
+`./PRScs.py --help` or `./PRScs.py -h`
+
+to print a list of command-line options.
 
 
 ## Using PRS-CS
