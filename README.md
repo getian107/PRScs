@@ -8,10 +8,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 ## Getting Started
 
 
-### Requirements
 
-
-### Installing PRS-CS
 
 
 ## Using PRS-CS
@@ -58,7 +55,7 @@ where SNP is the rs id, A1 is the reference/effect allele, A2 is the alternative
 
  - MCMC_THINNING_FACTOR (optional): Thinning of the Markov chain. Default is 5.
 
- - CHROM (optional): The chromosome on which the model is fitted. Useful for parallel computation. Default is iterating through 22 autosomes.
+ - CHROM (optional): The chromosome on which the model is fitted. Useful for parallel computation. Default is iterating through 22 autosomes (can be time-consuming).
 
 
 ## Support
