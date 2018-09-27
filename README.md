@@ -19,15 +19,15 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 `
 python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --CHROM=CHROM]
 `
- - PATH_TO_REFERENCE: Full path to the folder ldblk_1kg that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
+ - PATH_TO_REFERENCE: Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
 
  - VALIDATION_BIM_PREFIX: Full path and the prefix of the bim file for the validation set. 
 
  - SUM_STATS_FILE: Full path and the file name of the GWAS summary statistics.
-                   Summary statistics file must have the following format:
+                   Summary statistics file must have the following format: \
 
 `
-                   SNP          A1   A2   BETA      P
+                   SNP          A1   A2   BETA      P \
                    rs4970383    C    A    -0.0064   4.7780e-01
                    rs4475691    C    T    -0.0145   1.2450e-01
                    rs13302982   A    G    -0.0232   2.4290e-01
