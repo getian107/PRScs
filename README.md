@@ -1,4 +1,5 @@
 # PRS-CS
+
 **PRS-CS** is Python based command line tool that infers posterior SNP effect sizes under continuous shrinkage (CS) priors
 using GWAS summary statistics and an external LD reference panel. Details of the method are described in the bioRxiv preprint:
 
@@ -71,5 +72,10 @@ where SNP is the rs id, A1 is the reference/effect allele, A2 is the alternative
  - CHROM (optional): The chromosome on which the model is fitted. Useful for parallel computation. Default is iterating through 22 autosomes (can be time-consuming).
 
 
+## Output
+PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. Polygenic prediction can be produced by using `PLINK`'s `--score` command.
+
+
 ## Support
+
 Please report any problems or questions to Tian Ge (tge1@mgh.harvard.edu).
