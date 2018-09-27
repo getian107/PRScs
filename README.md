@@ -58,7 +58,7 @@ where SNP is the rs id, A1 is the reference/effect allele, A2 is the alternative
 
  - PARAM_B (optional): Parameter b in the gamma-gamma prior. Default is 0.5.
 
- - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a full Bayesian approach. This usually works well for polygenic traits in real applications. For ultra-sparse genetic architectures, fixing phi to a small number may have improved prediction accuracy.
+ - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a full Bayesian approach. This usually works well for polygenic traits in real applications. For ultra-sparse genetic architectures, fixing phi to a small number may have improved prediction accuracy. Alternatively, a small-scale grid search (e.g., phi=1e-6, 1e-4, 1e-2, 1) can be used to find the phi value that produces the most accurate prediction.
 
  - MCMC_ITERATIONS (optional): Total number of MCMC iterations. Default is 1,000.
 
