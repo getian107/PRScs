@@ -14,8 +14,6 @@ You can clone this repository using the following git command:
 
 Alternatively, you can download the source files from the github website (`https://github.com/getian107/PRScs`)
 
-**Note**: The repository contains LD reference data and is ~5G large.
-
 PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
 Once Python and its dependencies have been installed, you can run
