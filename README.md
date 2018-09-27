@@ -1,5 +1,5 @@
 # PRS-CS
-`PRS-CS` is Python based command line tool that infers posterior SNP effect sizes under continuous shrinkage (CS) priors
+**PRS-CS** is Python based command line tool that infers posterior SNP effect sizes under continuous shrinkage (CS) priors
 using GWAS summary statistics and an external LD reference panel. Details of the method are described in the bioRxiv preprint:
 
 T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Regression and Continuous Shrinkage Priors. bioRxiv preprint, doi: https://doi.org/10.1101/416859, 2018.
@@ -12,6 +12,8 @@ You can clone this repository using the following git command:
 `git clone https://github.com/getian107/PRScs.git`
 
 Alternatively, you can download the source files from the github website (`https://github.com/getian107/PRScs`)
+
+**Note**: The repository contains LD reference data and is ~5G large.
 
 PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
