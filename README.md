@@ -73,7 +73,12 @@ where SNP is the rs id, A1 is the reference/effect allele, A2 is the alternative
 
 
 ## Output
+
 PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. Polygenic prediction can be produced by using `PLINK`'s `--score` command.
+
+
+## Test data
+
 
 
 ## Support
