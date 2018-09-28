@@ -34,7 +34,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 
  - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the validation set. 
 
- - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. Summary statistics file must have the following format:
+ - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. Summary statistics file must have the following format (including header line):
 
 ```
     SNP          A1   A2   BETA      P
