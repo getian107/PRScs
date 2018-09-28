@@ -82,9 +82,9 @@ PRS-CS writes posterior SNP effect size estimates for each chromosome to the use
 The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on chromosome 22.
 An example to use the test data:
 
-```
+`
 python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim --sst_file=path_to_sumstats --n_gwas=200000 --chrom=22 --out_dir=path_to_output
-```
+`
 
 
 ## Support
