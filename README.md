@@ -1,6 +1,6 @@
 # PRS-CS
 
-**PRS-CS** is Python based command line tool that infers posterior SNP effect sizes under continuous shrinkage (CS) priors
+**PRS-CS** is a Python based command line tool that infers posterior SNP effect sizes under continuous shrinkage (CS) priors
 using GWAS summary statistics and an external LD reference panel. Details of the method are described in the bioRxiv preprint:
 
 T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Regression and Continuous Shrinkage Priors. bioRxiv preprint, doi: https://doi.org/10.1101/416859, 2018.
@@ -8,19 +8,21 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Getting Started
 
-You can clone this repository using the following git command:
+- Clone this repository using the following git command:
+   
+    `git clone https://github.com/getian107/PRScs.git`
 
-`git clone https://github.com/getian107/PRScs.git`
+    Alternatively, download the source files from the github website (`https://github.com/getian107/PRScs`)
 
-Alternatively, you can download the source files from the github website (`https://github.com/getian107/PRScs`)
+- Download the [LD reference](https://www.dropbox.com/s/v2n1jjwnihk3nwb/ldblk_1kg.tar.gz?dl=0 "LD reference") (~4.5G) and extract the files using e.g. `tar -zxvf ldblk_1kg.tar.gz`
 
-PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
+- PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
-Once Python and its dependencies have been installed, you can run
+- Once Python and its dependencies have been installed, you can run
 
-`./PRScs.py --help` or `./PRScs.py -h`
+    `./PRScs.py --help` or `./PRScs.py -h`
 
-to print a list of command-line options.
+    to print a list of command-line options.
 
 
 ## Using PRS-CS
@@ -28,7 +30,7 @@ to print a list of command-line options.
 `
 python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --CHROM=CHROM]
 `
- - PATH_TO_REFERENCE (required): Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
+ - PATH_TO_REFERENCE (required): Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`).
 
  - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the validation set. 
 
@@ -77,6 +79,12 @@ PRS-CS writes posterior SNP effect size estimates for each chromosome to the use
 
 ## Test Data
 
+The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on chromosome 22.
+An example to use the test data:
+
+`
+python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim --sst_file=path_to_sumstats --n_gwas=200000 --chrom=22 --out_dir=path_to_output
+`
 
 
 ## Support
