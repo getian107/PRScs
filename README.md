@@ -34,7 +34,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 
  - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the validation set. 
 
- - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. Summary statistics file must have the following format (including header line):
+ - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. The summary statistics file must have the following format (including the header line):
 
 ```
     SNP          A1   A2   BETA      P
@@ -51,7 +51,7 @@ Or:
     rs13302982   A    G    1.1337    0.0209
     ...
 ```
-where SNP is the rs id, A1 is the reference/effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the reference allele, P is the p-value of the effect
+where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the reference allele, P is the p-value of the effect.
 
  - GWAS_SAMPLE_SIZE (required): Sample size of the GWAS.
 
@@ -69,12 +69,12 @@ where SNP is the rs id, A1 is the reference/effect allele, A2 is the alternative
 
  - MCMC_THINNING_FACTOR (optional): Thinning of the Markov chain. Default is 5.
 
- - CHROM (optional): The chromosome on which the model is fitted. Useful for parallel computation. Default is iterating through 22 autosomes (can be time-consuming).
+ - CHROM (optional): The chromosome on which the model is fitted. Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
 
 
 ## Output
 
-PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. Polygenic prediction can be produced by using `PLINK`'s `--score` command.
+PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. The output file contains chromosome, rs ID, base pair, A1, A2 and posterior effect size estimate for each SNP. Polygenic prediction can be produced by using `PLINK`'s `--score` command.
 
 
 ## Test Data
@@ -83,10 +83,12 @@ The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on 
 An example to use the test data:
 
 `
-python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim --sst_file=path_to_sumstats --n_gwas=200000 --chrom=22 --out_dir=path_to_output
+python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --out_dir=path_to_output
 `
 
 
 ## Support
 
-Please report any problems or questions to Tian Ge (tge1@mgh.harvard.edu).
+Please direct any problems or questions to Tian Ge (tge1@mgh.harvard.edu).
+
+
