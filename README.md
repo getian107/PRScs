@@ -69,7 +69,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
  - MCMC_THINNING_FACTOR (optional): Thinning of the Markov chain. Default is 5.
 
- - CHROM (optional): The chromosome on which the model is fitted. Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
+ - CHROM (optional): The chromosome(s) on which the model is fitted, separated by comma, i.e., `--chrom=1,3,5`. Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
 
 
 ## Output
