@@ -18,7 +18,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
-- Once Python and its dependencies have been installed, run
+- Once Python and its dependencies have been installed, running
 
     `./PRScs.py --help` or `./PRScs.py -h`
 
@@ -61,7 +61,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
  - PARAM_B (optional): Parameter b in the gamma-gamma prior. Default is 0.5.
 
- - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a fully Bayesian approach. This usually works well for polygenic traits with large GWAS sample sizes. For GWAS with limited sample sizes (including most of the current disease GWAS), fixing phi to 1e-4 or 1e-2, or doing a small-scale grid search (e.g., phi=1e-6, 1e-4, 1e-2, 1) to find the optimal phi value often improves perdictive performance.
+ - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a fully Bayesian approach. This usually works well for polygenic traits with large GWAS sample sizes (hundreds of thousands of subjects). For GWAS with limited sample sizes (including most of the current disease GWAS), fixing phi to 1e-4 or 1e-2, or doing a small-scale grid search (e.g., phi=1e-6, 1e-4, 1e-2, 1) to find the optimal phi value often improves perdictive performance.
 
  - MCMC_ITERATIONS (optional): Total number of MCMC iterations. Default is 1,000.
 
@@ -74,7 +74,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
 ## Output
 
-PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. The output file contains chromosome, rs ID, base position, A1, A2 and posterior effect size estimate for each SNP. Polygenic prediction can be produced by concatenating output files from all chromosomes and then using `PLINK`'s `--score` command.
+PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. The output file contains chromosome, rs ID, base position, A1, A2 and posterior effect size estimate for each SNP. An individual-level polygenic score can be produced by concatenating output files from all chromosomes and then using `PLINK`'s `--score` command.
 
 
 ## Test Data
