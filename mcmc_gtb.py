@@ -78,7 +78,11 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
     beta_est /= sp.sqrt(2.0*maf*(1.0-maf))
 
     # write posterior effect sizes
-    eff_file = out_dir + '/pst_eff_a%d_b%.2f_phi%.3e_chr%d.txt' % (a, b, phi, chrom)
+    if phi_updt == True:
+        eff_file = out_dir + '/pst_eff_a%d_b%.1f_phiauto_chr%d.txt' % (a, b, chrom)
+    else:
+        eff_file = out_dir + '/pst_eff_a%d_b%.1f_phi%1.0e_chr%d.txt' % (a, b, phi, chrom)
+
     with open(eff_file, 'w') as ff:
         for snp, bp, a1, a2, beta in zip(sst_dict['SNP'], sst_dict['BP'], sst_dict['A1'], sst_dict['A2'], beta_est):
             ff.write('%d\t%s\t%d\t%s\t%s\t%.6e\n' % (chrom, snp, bp, a1, a2, beta))
