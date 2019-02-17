@@ -14,21 +14,21 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
     Alternatively, download the source files from the github website (`https://github.com/getian107/PRScs`)
 
-- Download the [LD reference](https://www.dropbox.com/s/v2n1jjwnihk3nwb/ldblk_1kg.tar.gz?dl=0 "LD reference") (~4.5G) and extract the files using e.g. `tar -zxvf ldblk_1kg.tar.gz`
+- Download the [LD reference](https://www.dropbox.com/s/v2n1jjwnihk3nwb/ldblk_1kg.tar.gz?dl=0 "LD reference") (~4.5G; computed using the 1000 Genomes European samples) and extract the files using e.g. `tar -zxvf ldblk_1kg.tar.gz`
 
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
-- Once Python and its dependencies have been installed, you can run
+- Once Python and its dependencies have been installed, run
 
     `./PRScs.py --help` or `./PRScs.py -h`
 
-    to print a list of command-line options.
+    will print a list of command-line options.
 
 
 ## Using PRS-CS
 
 `
-python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --CHROM=CHROM]
+python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM]
 `
  - PATH_TO_REFERENCE (required): Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`).
 
@@ -61,7 +61,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
  - PARAM_B (optional): Parameter b in the gamma-gamma prior. Default is 0.5.
 
- - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a full Bayesian approach. This usually works well for polygenic traits in real applications. For ultra-sparse genetic architectures, fixing phi to a small number may have improved prediction accuracy. Alternatively, a small-scale grid search (e.g., phi=1e-6, 1e-4, 1e-2, 1) can be used to find the phi value that produces the most accurate prediction.
+ - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a fully Bayesian approach. This usually works well for polygenic traits with large GWAS sample sizes. For GWAS with limited sample sizes (including most of the current disease GWAS), fixing phi to 1e-4 or 1e-2, or doing a small-scale grid search (e.g., phi=1e-6, 1e-4, 1e-2, 1) to find the optimal phi value often improves perdictive performance.
 
  - MCMC_ITERATIONS (optional): Total number of MCMC iterations. Default is 1,000.
 
@@ -74,7 +74,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
 ## Output
 
-PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. The output file contains chromosome, rs ID, base pair, A1, A2 and posterior effect size estimate for each SNP. Polygenic prediction can be produced by using `PLINK`'s `--score` command.
+PRS-CS writes posterior SNP effect size estimates for each chromosome to the user-specified directory. The output file contains chromosome, rs ID, base position, A1, A2 and posterior effect size estimate for each SNP. Polygenic prediction can be produced by concatenating output files from all chromosomes and then using `PLINK`'s `--score` command.
 
 
 ## Test Data
@@ -83,7 +83,7 @@ The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on 
 An example to use the test data:
 
 `
-python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --out_dir=path_to_output
+python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi 1e-2 --out_dir=path_to_output
 `
 
 
