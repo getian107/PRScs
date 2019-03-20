@@ -57,7 +57,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 
  - BETA_STD (optional): If True, return standardized posterior SNP effect sizes
                         (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects).
-                        If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the standardized effect sizes
+                        If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes
                         using allele frequencies estimated from the reference panel. Defauls is False.
 
 """

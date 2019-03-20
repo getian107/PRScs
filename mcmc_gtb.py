@@ -74,7 +74,7 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
             sigma_est += sigma/n_pst
             phi_est += phi/n_pst
 
-    # standardized beta to per-allele beta
+    # convert standardized beta to per-allele beta
     if beta_std == False:
         beta_est /= sp.sqrt(2.0*maf*(1.0-maf))
 
