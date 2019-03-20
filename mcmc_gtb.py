@@ -12,7 +12,7 @@ from scipy import random
 import gigrnd
 
 
-def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir):
+def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std):
     print('... MCMC ...')
 
     # derived stats
@@ -74,8 +74,9 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
             sigma_est += sigma/n_pst
             phi_est += phi/n_pst
 
-    # normalized beta to per-allele beta
-    beta_est /= sp.sqrt(2.0*maf*(1.0-maf))
+    # standardized beta to per-allele beta
+    if beta_std == False:
+        beta_est /= sp.sqrt(2.0*maf*(1.0-maf))
 
     # write posterior effect sizes
     if phi_updt == True:

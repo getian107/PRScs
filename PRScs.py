@@ -55,6 +55,11 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
  - CHROM (optional): The chromosome on which the model is fitted, separated by comma, e.g., --chrom=1,3,5.
                      Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
 
+ - BETA_STD (optional): If True, return standardized posterior SNP effect sizes
+                        (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects).
+                        If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the standardized effect sizes
+                        using allele frequencies estimated from the reference panel. Defauls is False.
+
 """
 
 
@@ -68,10 +73,10 @@ import gigrnd
 
 def parse_param():
     long_opts_list = ['ref_dir=', 'bim_prefix=', 'sst_file=', 'a=', 'b=', 'phi=', 'n_gwas=',
-                      'n_iter=', 'n_burnin=', 'thin=', 'out_dir=', 'chrom=', 'help']
+                      'n_iter=', 'n_burnin=', 'thin=', 'out_dir=', 'chrom=', 'beta_std=', 'help']
 
     param_dict = {'ref_dir': None, 'bim_prefix': None, 'sst_file': None, 'a': 1, 'b': 0.5, 'phi': None, 'n_gwas': None,
-                  'n_iter': 1000, 'n_burnin': 500, 'thin': 5, 'out_dir': None, 'chrom': range(1,23)}
+                  'n_iter': 1000, 'n_burnin': 500, 'thin': 5, 'out_dir': None, 'chrom': range(1,23), 'beta_std': False}
 
     print('\n')
 
@@ -99,6 +104,7 @@ def parse_param():
             elif opt == "--thin": param_dict['thin'] = int(arg)
             elif opt == "--out_dir": param_dict['out_dir'] = arg
             elif opt == "--chrom": param_dict['chrom'] = arg.split(',')
+            elif opt == "--beta_std": param_dict['beta_std'] = arg
     else:
         print __doc__
         sys.exit(0)
@@ -141,7 +147,7 @@ def main():
         ld_blk, blk_size = parse_genet.parse_ldblk(param_dict['ref_dir'] + '/ldblk_1kg', sst_dict, int(chrom))
 
         mcmc_gtb.mcmc(param_dict['a'], param_dict['b'], param_dict['phi'], sst_dict, param_dict['n_gwas'], ld_blk, blk_size,
-            param_dict['n_iter'], param_dict['n_burnin'], param_dict['thin'], int(chrom), param_dict['out_dir'])
+            param_dict['n_iter'], param_dict['n_burnin'], param_dict['thin'], int(chrom), param_dict['out_dir'], param_dict['beta_std'])
 
         print('\n')
 
