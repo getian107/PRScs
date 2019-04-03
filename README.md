@@ -85,7 +85,7 @@ The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on 
 An example to use the test data:
 
 `
-python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi 1e-2 --out_dir=path_to_output
+python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi=1e-2 --out_dir=path_to_output
 `
 
 
