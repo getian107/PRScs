@@ -51,7 +51,7 @@ Or:
     rs13302982   A    G    1.1337    0.0209
     ...
 ```
-where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the reference allele, P is the p-value of the effect.
+where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the reference allele, P is the p-value of the effect. In fact, BETA/OR is only used to determine the direction of an association, and therefore if z-scores or even +1/-1 indicating effect directions are presented in the BETA column, the algorithm should still work properly.
 
  - GWAS_SAMPLE_SIZE (required): Sample size of the GWAS.
 
