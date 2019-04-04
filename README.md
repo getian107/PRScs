@@ -16,6 +16,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 - Download the [LD reference](https://www.dropbox.com/s/v2n1jjwnihk3nwb/ldblk_1kg.tar.gz?dl=0 "LD reference") (~4.5G; computed using the 1000 Genomes European samples) and extract the files using e.g. `tar -zxvf ldblk_1kg.tar.gz`
 
+- PRScs is currently written and testing with Python 2.X.
+
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
 - Once Python and its dependencies have been installed, running
