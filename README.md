@@ -14,8 +14,17 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
     Alternatively, download the source files from the github website (`https://github.com/getian107/PRScs`)
 
-- Download the [LD reference](https://www.dropbox.com/s/v2n1jjwnihk3nwb/ldblk_1kg.tar.gz?dl=0 "LD reference") (~4.5G; computed using the 1000 Genomes European samples) and extract the files using e.g. `tar -zxvf ldblk_1kg.tar.gz`
+- Download the LD reference computed using the 1000 Genomes samples, and extract files:
 
+    [EUR reference](https://www.dropbox.com/s/p9aqanhxvxaqv8k/ldblk_1kg_eur.tar.gz?dl=0 "EUR reference") (~4.56G);
+    `tar -zxvf ldblk_1kg_eur.tar.gz`
+
+    [EAS reference](https://www.dropbox.com/s/o2yo2x7icu1xtpn/ldblk_1kg_eas.tar.gz?dl=0 "EAS reference") (~4.33G);
+    `tar -zxvf ldblk_1kg_eas.tar.gz`
+    
+    [AFR reference](https://www.dropbox.com/s/mq94h1q9uuhun1h/ldblk_1kg_afr.tar.gz?dl=0 "AFR reference") (~4.44G);
+    `tar -zxvf ldblk_1kg_afr.tar.gz`
+ 
 - PRScs is currently written and tested with Python 2.X.
 
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
@@ -32,7 +41,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 `
 python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --beta_std=BETA_STD]
 `
- - PATH_TO_REFERENCE (required): Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`).
+ - PATH_TO_REFERENCE (required): Full path (including folder name) to the directory (`ldblk_1kg_eur`, `ldblk_1kg_eas` or `ldblk_1kg_afr`) that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`).
 
  - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the validation set. 
 
@@ -57,7 +66,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
  - GWAS_SAMPLE_SIZE (required): Sample size of the GWAS.
 
- - OUTPUT_DIR (required): Output directory of the posterior effect size estimates.
+ - OUTPUT_DIR (required): Output directory and output filename prefix of the posterior effect size estimates.
 
  - PARAM_A (optional): Parameter a in the gamma-gamma prior. Default is 1.
 
@@ -87,7 +96,7 @@ The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on 
 An example to use the test data:
 
 `
-python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi=1e-2 --out_dir=path_to_output
+python PRScs.py --ref_dir=path_to_ref/ldblk_1kg_eur --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi=1e-2 --out_dir=path_to_output/eur
 `
 
 
