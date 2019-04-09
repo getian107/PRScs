@@ -16,6 +16,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 - Download the [LD reference](https://www.dropbox.com/s/v2n1jjwnihk3nwb/ldblk_1kg.tar.gz?dl=0 "LD reference") (~4.5G; computed using the 1000 Genomes European samples) and extract the files using e.g. `tar -zxvf ldblk_1kg.tar.gz`
 
+- PRScs is currently written and tested with Python 2.X.
+
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
 - Once Python and its dependencies have been installed, running
@@ -28,7 +30,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 ## Using PRS-CS
 
 `
-python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM]
+python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --beta_std=BETA_STD]
 `
  - PATH_TO_REFERENCE (required): Full path to the folder `ldblk_1kg` that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`).
 
@@ -51,7 +53,7 @@ Or:
     rs13302982   A    G    1.1337    0.0209
     ...
 ```
-where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the reference allele, P is the p-value of the effect.
+where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the reference allele, P is the p-value of the effect. In fact, BETA/OR is only used to determine the direction of an association, and therefore if z-scores or even +1/-1 indicating effect directions are presented in the BETA column, the algorithm should still work properly.
 
  - GWAS_SAMPLE_SIZE (required): Sample size of the GWAS.
 
@@ -71,6 +73,8 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
  - CHROM (optional): The chromosome(s) on which the model is fitted, separated by comma, e.g., `--chrom=1,3,5`. Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
 
+- BETA_STD (optional): If True, return standardized posterior SNP effect sizes (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects). If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes using allele frequencies estimated from the reference panel. Defauls is False.
+
 
 ## Output
 
@@ -83,7 +87,7 @@ The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on 
 An example to use the test data:
 
 `
-python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi 1e-2 --out_dir=path_to_output
+python PRScs.py --ref_dir=path_to_ref --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi=1e-2 --out_dir=path_to_output
 `
 
 
