@@ -3,7 +3,7 @@
 **PRS-CS** is a Python based command line tool that infers posterior SNP effect sizes under continuous shrinkage (CS) priors
 using GWAS summary statistics and an external LD reference panel. Details of the method are described in the bioRxiv preprint:
 
-T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Regression and Continuous Shrinkage Priors. bioRxiv preprint, doi: https://doi.org/10.1101/416859, 2018.
+T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Regression and Continuous Shrinkage Priors. *Nature Communications*, in press; bioRxiv preprint, doi: https://doi.org/10.1101/416859, 2019.
  
 
 ## Getting Started
