@@ -12,9 +12,10 @@ Usage:
 python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR
                 [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM]
 
- - PATH_TO_REFERENCE: Full path to the folder ldblk_1kg that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
+ - PATH_TO_REFERENCE: Full path (including folder name) to the directory (ldblk_1kg_eur, ldblk_1kg_eas or ldblk_1kg_afr)
+                      that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
 
- - VALIDATION_BIM_PREFIX: Full path and the prefix of the bim file for the validation set. 
+ - VALIDATION_BIM_PREFIX: Full path and the prefix of the bim file for the validation/testing set. 
 
  - SUM_STATS_FILE: Full path and the file name of the GWAS summary statistics.
                    Summary statistics file must have the following format (including the header line):
@@ -35,7 +36,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 
  - GWAS_SAMPLE_SIZE: Sample size of the GWAS.
 
- - OUTPUT_DIR: Output directory of the posterior effect size estimates.
+ - OUTPUT_DIR: Output directory and output filename prefix of the posterior effect size estimates.
 
  - PARAM_A (optional): Parameter a in the gamma-gamma prior. Default is 1.
 
@@ -138,13 +139,13 @@ def main():
     for chrom in param_dict['chrom']:
         print('##### process chromosome %d #####' % int(chrom))
 
-        ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/ldblk_1kg/snpinfo_1kg_hm3', int(chrom))
+        ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/snpinfo_1kg_hm3', int(chrom))
 
         vld_dict = parse_genet.parse_bim(param_dict['bim_prefix'], int(chrom))
 
         sst_dict = parse_genet.parse_sumstats(ref_dict, vld_dict, param_dict['sst_file'], param_dict['n_gwas'])
 
-        ld_blk, blk_size = parse_genet.parse_ldblk(param_dict['ref_dir'] + '/ldblk_1kg', sst_dict, int(chrom))
+        ld_blk, blk_size = parse_genet.parse_ldblk(param_dict['ref_dir'], sst_dict, int(chrom))
 
         mcmc_gtb.mcmc(param_dict['a'], param_dict['b'], param_dict['phi'], sst_dict, param_dict['n_gwas'], ld_blk, blk_size,
             param_dict['n_iter'], param_dict['n_burnin'], param_dict['thin'], int(chrom), param_dict['out_dir'], param_dict['beta_std'])
