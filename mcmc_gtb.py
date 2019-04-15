@@ -69,10 +69,10 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
 
         # posterior
         if (itr>n_burnin) and (itr % thin == 0):
-            beta_est += beta/n_pst
-            psi_est += psi/n_pst
-            sigma_est += sigma/n_pst
-            phi_est += phi/n_pst
+            beta_est = beta_est + beta/n_pst
+            psi_est = psi_est + psi/n_pst
+            sigma_est = sigma_est + sigma/n_pst
+            phi_est = phi_est + phi/n_pst
 
     # convert standardized beta to per-allele beta
     if beta_std == False:
@@ -87,6 +87,10 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
     with open(eff_file, 'w') as ff:
         for snp, bp, a1, a2, beta in zip(sst_dict['SNP'], sst_dict['BP'], sst_dict['A1'], sst_dict['A2'], beta_est):
             ff.write('%d\t%s\t%d\t%s\t%s\t%.6e\n' % (chrom, snp, bp, a1, a2, beta))
+
+    # print estimated phi
+    if phi_updt == True:
+        print('... Estimated global shrinkage parameter: %1.2e ...' % phi_est )
 
     print('... Done ...')
 
