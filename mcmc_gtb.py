@@ -75,7 +75,7 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
             phi_est = phi_est + phi/n_pst
 
     # convert standardized beta to per-allele beta
-    if beta_std == False:
+    if beta_std == 'False':
         beta_est /= sp.sqrt(2.0*maf*(1.0-maf))
 
     # write posterior effect sizes
