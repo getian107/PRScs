@@ -46,7 +46,7 @@ Jun 6, 2019: fixed a bug in `--beta_std`. If you explicitly specified `--beta_st
 `
 python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --beta_std=BETA_STD]
 `
- - PATH_TO_REFERENCE (required): Full path (including folder name) to the directory (`ldblk_1kg_eur`, `ldblk_1kg_eas` or `ldblk_1kg_afr`) that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`).
+ - PATH_TO_REFERENCE (required): Full path (including folder name) to the directory (`ldblk_1kg_eur`, `ldblk_1kg_eas` or `ldblk_1kg_afr`) that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`). Note that the reference panel should match the ancestry of the GWAS sample (not the testing sample).
 
  - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the validation set. 
 
@@ -77,7 +77,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
  - PARAM_B (optional): Parameter b in the gamma-gamma prior. Default is 0.5.
 
- - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a fully Bayesian approach. This usually works well for polygenic traits with large GWAS sample sizes (hundreds of thousands of subjects). For GWAS with limited sample sizes (including most of the current disease GWAS), fixing phi to 1e-4 or 1e-2, or doing a small-scale grid search (e.g., phi=1e-6, 1e-4, 1e-2, 1) to find the optimal phi value often improves perdictive performance.
+ - PARAM_PHI (optional): Global shrinkage parameter phi. If phi is not specified, it will be learnt from the data using a fully Bayesian approach. This usually works well for polygenic traits with large GWAS sample sizes (hundreds of thousands of subjects). For GWAS with limited sample sizes (including most of the current disease GWAS), fixing phi to 1e-2 (for highly polygenic traits) or 1e-4 (for less polygenic traits), or doing a small-scale grid search (e.g., phi=1e-6, 1e-4, 1e-2, 1) to find the optimal phi value often improves perdictive performance.
 
  - MCMC_ITERATIONS (optional): Total number of MCMC iterations. Default is 1,000.
 
