@@ -12,8 +12,12 @@ from scipy import random
 import gigrnd
 
 
-def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std):
+def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std, seed):
     print('... MCMC ...')
+
+    # seed
+    if seed != None:
+        random.seed(seed)
 
     # derived stats
     beta_mrg = sp.array(sst_dict['BETA'], ndmin=2).T
