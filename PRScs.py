@@ -61,7 +61,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
                         If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes
                         using allele frequencies estimated from the reference panel. Defauls is False.
 
- - SEED (optional): Non-negative integer which seeds the random number geenerator.
+ - SEED (optional): Non-negative integer which seeds the random number generator.
 
 """
 

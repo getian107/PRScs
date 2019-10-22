@@ -8,7 +8,9 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
-Jun 6, 2019: fixed a bug in `--beta_std`. If you explicitly specified `--beta_std=False`, the output was actually standardized beta (in contrast to desired per-allele beta) and we recommend redoing the analysis. If you left `--beta_std` as default or used `--beta_std=True`, the results were not affected.
+**Oct 20, 2019**: added `--seed`, which can be used to seed the random number generator using a non-negative integer.
+
+**Jun 6, 2019**: fixed a bug in `--beta_std`. If you explicitly specified `--beta_std=False`, the output was actually standardized beta (in contrast to desired per-allele beta) and we recommend redoing the analysis. If you left `--beta_std` as default or used `--beta_std=True`, the results were not affected.
 
 
 ## Getting Started
@@ -44,7 +46,7 @@ Jun 6, 2019: fixed a bug in `--beta_std`. If you explicitly specified `--beta_st
 ## Using PRS-CS
 
 `
-python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --beta_std=BETA_STD]
+python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --beta_std=BETA_STD --seed=SEED]
 `
  - PATH_TO_REFERENCE (required): Full path (including folder name) to the directory (`ldblk_1kg_eur`, `ldblk_1kg_eas` or `ldblk_1kg_afr`) that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`). Note that the reference panel should match the ancestry of the GWAS sample (not the testing sample).
 
@@ -88,6 +90,8 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
  - CHROM (optional): The chromosome(s) on which the model is fitted, separated by comma, e.g., `--chrom=1,3,5`. Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
 
 - BETA_STD (optional): If True, return standardized posterior SNP effect sizes (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects). If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes using allele frequencies estimated from the reference panel. Defauls is False.
+
+- SEED (optional): Non-negative integer which seeds the random number generator.
 
 
 ## Output
