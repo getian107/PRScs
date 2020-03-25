@@ -59,7 +59,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
  - BETA_STD (optional): If True, return standardized posterior SNP effect sizes
                         (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects).
                         If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes
-                        using allele frequencies estimated from the reference panel. Defauls is False.
+                        using allele frequencies estimated from the reference panel. Default is False.
 
  - SEED (optional): Non-negative integer which seeds the random number generator.
 
@@ -93,7 +93,7 @@ def parse_param():
 
         for opt, arg in opts:
             if opt == "-h" or opt == "--help":
-                print __doc__
+                print(__doc__)
                 sys.exit(0)
             elif opt == "--ref_dir": param_dict['ref_dir'] = arg
             elif opt == "--bim_prefix": param_dict['bim_prefix'] = arg
@@ -110,7 +110,7 @@ def parse_param():
             elif opt == "--beta_std": param_dict['beta_std'] = arg
             elif opt == "--seed": param_dict['seed'] = int(arg)
     else:
-        print __doc__
+        print(__doc__)
         sys.exit(0)
 
     if param_dict['ref_dir'] == None:

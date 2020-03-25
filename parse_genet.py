@@ -120,9 +120,13 @@ def parse_ldblk(ldblk_dir, sst_dict, chrom):
     hdf_chr = h5py.File(chr_name, 'r')
     n_blk = len(hdf_chr)
     ld_blk = [sp.array(hdf_chr['blk_'+str(blk)]['ldblk']) for blk in range(1,n_blk+1)]
-    snp_blk = [list(hdf_chr['blk_'+str(blk)]['snplist']) for blk in range(1,n_blk+1)]
+
+    snp_blk = []
+    for blk in range(1,n_blk+1):
+        snp_blk.append([bb.decode("UTF-8") for bb in list(hdf_chr['blk_'+str(blk)]['snplist'])])
 
     snp_sst = set(sst_dict['SNP'])
+
     blk_size = []
     for blk in range(n_blk):
         idx = [ii for (ii, snp) in enumerate(snp_blk[blk]) if snp in snp_sst]
