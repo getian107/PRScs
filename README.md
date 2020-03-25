@@ -8,6 +8,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
+**Mar 25, 2020**: minor changes to make the software Python 2 and 3 compatible.
+
 **Oct 20, 2019**: added `--seed`, which can be used to seed the random number generator using a non-negative integer.
 
 **Jun 6, 2019**: fixed a bug in `--beta_std`. If you explicitly specified `--beta_std=False`, the output was actually standardized beta (in contrast to desired per-allele beta) and we recommend redoing the analysis. If you left `--beta_std` as default or used `--beta_std=True`, the results were not affected.
@@ -32,8 +34,6 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
     [AFR reference](https://www.dropbox.com/s/mq94h1q9uuhun1h/ldblk_1kg_afr.tar.gz?dl=0 "AFR reference") (~4.44G);
     `tar -zxvf ldblk_1kg_afr.tar.gz`
  
-- PRScs is currently written and tested with Python 2.X.
-
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
 - Once Python and its dependencies have been installed, running
@@ -89,7 +89,7 @@ where SNP is the rs ID, A1 is the reference/effect allele, A2 is the alternative
 
  - CHROM (optional): The chromosome(s) on which the model is fitted, separated by comma, e.g., `--chrom=1,3,5`. Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
 
-- BETA_STD (optional): If True, return standardized posterior SNP effect sizes (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects). If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes using allele frequencies estimated from the reference panel. Defauls is False.
+- BETA_STD (optional): If True, return standardized posterior SNP effect sizes (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects). If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes using allele frequencies estimated from the reference panel. Default is False.
 
 - SEED (optional): Non-negative integer which seeds the random number generator.
 
