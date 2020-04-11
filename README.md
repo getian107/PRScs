@@ -8,6 +8,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
+**Apr 11, 2020**: add strand flip check
+
 **Mar 25, 2020**: minor changes to make the software Python 2 and 3 compatible.
 
 **Oct 20, 2019**: added `--seed`, which can be used to seed the random number generator using a non-negative integer.
