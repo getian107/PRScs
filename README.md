@@ -8,6 +8,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
+**Apr 20, 2020**: added non-ATGC allele check.
+
 **Apr 11, 2020**: added strand flip check.
 
 **Mar 25, 2020**: minor changes to make the software Python 2 and 3 compatible.
