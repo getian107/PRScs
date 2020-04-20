@@ -63,6 +63,7 @@ def parse_sumstats(ref_dict, vld_dict, sst_file, n_subj):
 
 
     mapping = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+    ATGC = ['A', 'T', 'G', 'C']
 
     vld_snp = set(zip(vld_dict['SNP'], vld_dict['A1'], vld_dict['A2']))
 
@@ -71,8 +72,8 @@ def parse_sumstats(ref_dict, vld_dict, sst_file, n_subj):
               set(zip(ref_dict['SNP'], [mapping[aa] for aa in ref_dict['A2']], [mapping[aa] for aa in ref_dict['A1']]))
 
     sst_snp = set(zip(sst_dict['SNP'], sst_dict['A1'], sst_dict['A2'])) | set(zip(sst_dict['SNP'], sst_dict['A2'], sst_dict['A1'])) | \
-              set(zip(sst_dict['SNP'], [mapping[aa] for aa in sst_dict['A1']], [mapping[aa] for aa in sst_dict['A2']])) | \
-              set(zip(sst_dict['SNP'], [mapping[aa] for aa in sst_dict['A2']], [mapping[aa] for aa in sst_dict['A1']]))
+              set(zip(sst_dict['SNP'], [mapping[aa] for aa in sst_dict['A1'] if aa in ATGC], [mapping[aa] for aa in sst_dict['A2'] if aa in ATGC])) | \
+              set(zip(sst_dict['SNP'], [mapping[aa] for aa in sst_dict['A2'] if aa in ATGC], [mapping[aa] for aa in sst_dict['A1'] if aa in ATGC]))
 
     comm_snp = vld_snp & ref_snp & sst_snp
 
@@ -87,6 +88,8 @@ def parse_sumstats(ref_dict, vld_dict, sst_file, n_subj):
         for line in ff:
             ll = (line.strip()).split()
             snp = ll[0]; a1 = ll[1]; a2 = ll[2]
+            if a1 not in ATGC or a2 not in ATGC:
+                continue
             if (snp, a1, a2) in comm_snp or (snp, mapping[a1], mapping[a2]) in comm_snp:
                 if 'BETA' in header:
                     beta = float(ll[3])
