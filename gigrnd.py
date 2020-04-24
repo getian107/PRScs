@@ -63,7 +63,10 @@ def gigrnd(p, a, b):
     elif x > 2:
         s = math.sqrt(4/(alpha*math.cosh(1)+lam))
     elif x < 1/2:
-        s = min(1/lam, math.log(1+1/alpha+math.sqrt(1/math.pow(alpha,2)+2/alpha)))
+        if alpha == 0:
+            s = 1/lam
+        else:
+            s = min(1/lam, math.log(1+1/alpha+math.sqrt(1/math.pow(alpha,2)+2/alpha)))
 
     # find auxiliary parameters
     eta = -psi(t, alpha, lam)
