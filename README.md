@@ -8,6 +8,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
+**Apr 24, 2020**: accounted for a rare ZeroDivisionError in MCMC sampling.
+
 **Apr 20, 2020**: added non-ATGC allele check.
 
 **Apr 11, 2020**: added strand flip check.
