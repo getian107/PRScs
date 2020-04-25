@@ -117,6 +117,6 @@ python PRScs.py --ref_dir=path_to_ref/ldblk_1kg_eur --bim_prefix=path_to_bim/tes
 
 ## Support
 
-Please direct any problems or questions to Tian Ge (tge1@mgh.harvard.edu).
+Please direct questions or bug reports to Tian Ge (tge1@mgh.harvard.edu).
 
 
