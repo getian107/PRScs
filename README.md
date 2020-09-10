@@ -8,17 +8,19 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
-**Apr 24, 2020**: accounted for a rare ZeroDivisionError in MCMC sampling.
+**Sept 10, 2020**: Fixed a bug in strand flip when there are non-ATGC alleles (e.g., indels) in the GWAS summary statistics. Previous versions erroneously remove variants that can be matched across GWAS summary statistics, the reference panel and the validation bim file via strand flip, which reduces the number of SNPs used in prediction and may affect prediction accuracy. 
 
-**Apr 20, 2020**: added non-ATGC allele check.
+**Apr 24, 2020**: Accounted for a rare ZeroDivisionError in MCMC sampling.
 
-**Apr 11, 2020**: added strand flip check.
+**Apr 20, 2020**: Added non-ATGC allele check.
 
-**Mar 25, 2020**: minor changes to make the software Python 2 and 3 compatible.
+**Apr 11, 2020**: Added strand flip check.
 
-**Oct 20, 2019**: added `--seed`, which can be used to seed the random number generator using a non-negative integer.
+**Mar 25, 2020**: Minor changes to make the software Python 2 and 3 compatible.
 
-**Jun 6, 2019**: fixed a bug in `--beta_std`. If you explicitly specified `--beta_std=False`, the output was actually standardized beta (in contrast to desired per-allele beta) and we recommend redoing the analysis. If you left `--beta_std` as default or used `--beta_std=True`, the results were not affected.
+**Oct 20, 2019**: Added `--seed`, which can be used to seed the random number generator using a non-negative integer.
+
+**Jun 6, 2019**: Fixed a bug in `--beta_std`. If you explicitly specified `--beta_std=False`, the output was actually standardized beta (in contrast to desired per-allele beta) and we recommend redoing the analysis. If you left `--beta_std` as default or used `--beta_std=True`, the results were not affected.
 
 
 ## Getting Started
