@@ -58,7 +58,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 `
  - PATH_TO_REFERENCE (required): Full path (including folder name) to the directory (`ldblk_1kg_eur`, `ldblk_1kg_eas` or `ldblk_1kg_afr`) that contains information on the LD reference panel (`snpinfo_1kg_hm3` and `ldblk_1kg_chr*.hdf5`). Note that the reference panel should match the ancestry of the GWAS sample (not the testing sample).
 
- - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the validation set. 
+ - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the target (validation/testing) datasetset. This file is used to provide a list of SNPs that are available in the target dataset.
 
  - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. The summary statistics file must have the following format (including the header line):
 
