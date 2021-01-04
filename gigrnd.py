@@ -13,18 +13,18 @@ from scipy import random
 
 
 def psi(x, alpha, lam):
-    f = -alpha*(math.cosh(x)-1)-lam*(math.exp(x)-x-1)
+    f = -alpha*(math.cosh(x)-1.0)-lam*(math.exp(x)-x-1.0)
     return f
 
 
 def dpsi(x, alpha, lam):
-    f = -alpha*math.sinh(x)-lam*(math.exp(x)-1)
+    f = -alpha*math.sinh(x)-lam*(math.exp(x)-1.0)
     return f
 
 
 def g(x, sd, td, f1, f2):
     if (x >= -sd) and (x <= td):
-        f = 1
+        f = 1.0
     elif x > td:
         f = f1
     elif x < -sd:
@@ -48,25 +48,38 @@ def gigrnd(p, a, b):
     alpha = math.sqrt(math.pow(omega,2)+math.pow(lam,2))-lam
 
     # find t
-    x = -psi(1, alpha, lam)
-    if (x >= 1/2) and (x <= 2):
-        t = 1
-    elif x > 2:
-        t = math.sqrt(2/(alpha+lam))
-    elif x < 1/2:
-        t = math.log(4/(alpha+2*lam))
+    x = -psi(1.0, alpha, lam)
+    if (x >= 0.5) and (x <= 2.0):
+        t = 1.0
+    elif x > 2.0:
+        if (alpha == 0) and (lam == 0):
+            t = 1.0
+        else:
+            t = math.sqrt(2.0/(alpha+lam))
+    elif x < 0.5:
+        if (alpha == 0) and (lam == 0):
+            t = 1.0
+        else:
+            t = math.log(4.0/(alpha+2.0*lam))
 
     # find s
-    x = -psi(-1, alpha, lam)
-    if (x >= 1/2) and (x <= 2):
-        s = 1
-    elif x > 2:
-        s = math.sqrt(4/(alpha*math.cosh(1)+lam))
-    elif x < 1/2:
-        if alpha == 0:
-            s = 1/lam
+    x = -psi(-1.0, alpha, lam)
+    if (x >= 0.5) and (x <= 2.0):
+        s = 1.0
+    elif x > 2.0:
+        if (alpha == 0) and (lam == 0):
+            s = 1.0
         else:
-            s = min(1/lam, math.log(1+1/alpha+math.sqrt(1/math.pow(alpha,2)+2/alpha)))
+            s = math.sqrt(4.0/(alpha*math.cosh(1)+lam))
+    elif x < 0.5:
+        if (alpha == 0) and (lam == 0):
+            s = 1.0
+        elif alpha == 0:
+            s = 1.0/lam
+        elif lam == 0:
+            s = math.log(1.0+1.0/alpha+math.sqrt(1.0/math.pow(alpha,2)+2.0/alpha))
+        else:
+            s = min(1.0/lam, math.log(1.0+1.0/alpha+math.sqrt(1.0/math.pow(alpha,2)+2.0/alpha)))
 
     # find auxiliary parameters
     eta = -psi(t, alpha, lam)
@@ -74,8 +87,8 @@ def gigrnd(p, a, b):
     theta = -psi(-s, alpha, lam)
     xi = dpsi(-s, alpha, lam)
 
-    p = 1/xi
-    r = 1/zeta
+    p = 1.0/xi
+    r = 1.0/zeta
 
     td = t-r*eta
     sd = s-p*theta
@@ -99,9 +112,9 @@ def gigrnd(p, a, b):
             break
 
     # transform back to the three-parameter version gig(p,a,b)
-    rnd = math.exp(rnd)*(lam/omega+math.sqrt(1+math.pow(lam,2)/math.pow(omega,2)))
+    rnd = math.exp(rnd)*(lam/omega+math.sqrt(1.0+math.pow(lam,2)/math.pow(omega,2)))
     if swap:
-        rnd = 1/rnd
+        rnd = 1.0/rnd
 
     rnd = rnd/math.sqrt(a/b)
     return rnd
