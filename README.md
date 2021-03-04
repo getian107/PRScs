@@ -33,17 +33,33 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
     Alternatively, download the source files from the github website (`https://github.com/getian107/PRScs`)
 
-- Download the LD reference computed using the 1000 Genomes Project phase 3 samples, and extract files:
+- Download the LD reference panels and extract files:
 
-    [EUR reference](https://www.dropbox.com/s/p9aqanhxvxaqv8k/ldblk_1kg_eur.tar.gz?dl=0 "EUR reference") (~4.56G);
-    `tar -zxvf ldblk_1kg_eur.tar.gz`
+    LD reference panels constructed using the 1000 Genomes Project phase 3 samples: 
 
-    [EAS reference](https://www.dropbox.com/s/o2yo2x7icu1xtpn/ldblk_1kg_eas.tar.gz?dl=0 "EAS reference") (~4.33G);
-    `tar -zxvf ldblk_1kg_eas.tar.gz`
-    
     [AFR reference](https://www.dropbox.com/s/mq94h1q9uuhun1h/ldblk_1kg_afr.tar.gz?dl=0 "AFR reference") (~4.44G);
     `tar -zxvf ldblk_1kg_afr.tar.gz`
- 
+
+    [EAS reference](https://www.dropbox.com/s/7ek4lwwf2b7f749/ldblk_1kg_eas.tar.gz?dl=0 "EAS reference") (~4.33G);
+    `tar -zxvf ldblk_1kg_eas.tar.gz`
+
+    [EUR reference](https://www.dropbox.com/s/mt6var0z96vb6fv/ldblk_1kg_eur.tar.gz?dl=0 "EUR reference") (~4.56G);
+    `tar -zxvf ldblk_1kg_eur.tar.gz`
+    
+    LD reference panels constructed using the UK Biobank data:
+    
+    [AFR reference](https://www.dropbox.com/s/dtccsidwlb6pbtv/ldblk_ukbb_afr.tar.gz?dl=0 "AFR reference") (~4.93G);
+    `tar -zxvf ldblk_ukbb_afr.tar.gz`
+    
+    [EAS reference](https://www.dropbox.com/s/fz0y3tb9kayw8oq/ldblk_ukbb_eas.tar.gz?dl=0 "EAS reference") (~5.80G);
+    `tar -zxvf ldblk_ukbb_eas.tar.gz`
+    
+    [EUR reference](https://www.dropbox.com/s/t9opx2ty6ucrpib/ldblk_ukbb_eur.tar.gz?dl=0 "EUR reference") (~6.25G);
+    `tar -zxvf ldblk_ukbb_eur.tar.gz`
+    
+    [SAS reference](https://www.dropbox.com/s/nto6gdajq8qfhh0/ldblk_ukbb_sas.tar.gz?dl=0 "SAS reference") (~7.37G);
+    `tar -zxvf ldblk_ukbb_sas.tar.gz`
+
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
 - Once Python and its dependencies have been installed, running
