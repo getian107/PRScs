@@ -12,10 +12,13 @@ Usage:
 python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR
                 [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --seed=SEED]
 
- - PATH_TO_REFERENCE: Full path (including folder name) to the directory (ldblk_1kg_eur, ldblk_1kg_eas or ldblk_1kg_afr)
-                      that contains information on the LD reference panel (snpinfo_1kg_hm3 and ldblk_1kg_chr*.hdf5).
+ - PATH_TO_REFERENCE: Full path (including folder name) to the directory
+                      that contains information on the LD reference panel (the snpinfo file and hdf5 files).
+                      If the 1000 Genomes reference panel is used, folder name would be ldblk_1kg_afr, ldblk_1kg_eas or ldblk_1kg_eur;
+                      if the UK Biobank reference panel is used, folder name would be ldblk_1kg_afr, ldblk_1kg_eas, ldblk_1kg_eur or ldblk_1kg_sas.
 
- - VALIDATION_BIM_PREFIX: Full path and the prefix of the bim file for the validation/testing set. 
+ - VALIDATION_BIM_PREFIX: Full path and the prefix of the bim file for the target (validation/testing) dataset.
+                          This file is used to provide a list of SNPs that are available in the target dataset.
 
  - SUM_STATS_FILE: Full path and the file name of the GWAS summary statistics.
                    Summary statistics file must have the following format (including the header line):
@@ -66,6 +69,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 """
 
 
+import os
 import sys
 import getopt
 
@@ -117,7 +121,7 @@ def parse_param():
         print('* Please specify the directory to the reference panel using --ref_dir\n')
         sys.exit(2)
     elif param_dict['bim_prefix'] == None:
-        print('* Please specify the directory and prefix of the bim file for the validation set using --bim_prefix\n')
+        print('* Please specify the directory and prefix of the bim file for the target dataset using --bim_prefix\n')
         sys.exit(2)
     elif param_dict['sst_file'] == None:
         print('* Please specify the summary statistics file using --sst_file\n')
@@ -142,7 +146,10 @@ def main():
     for chrom in param_dict['chrom']:
         print('##### process chromosome %d #####' % int(chrom))
 
-        ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/snpinfo_1kg_hm3', int(chrom))
+        if '1kg' in os.path.basename(param_dict['ref_dir']):
+            ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/snpinfo_1kg_hm3', int(chrom))
+        elif 'ukbb' in os.path.basename(param_dict['ref_dir']):
+            ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/snpinfo_ukbb_hm3', int(chrom))
 
         vld_dict = parse_genet.parse_bim(param_dict['bim_prefix'], int(chrom))
 

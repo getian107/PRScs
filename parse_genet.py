@@ -6,6 +6,7 @@ Parse the reference panel, summary statistics, and validation set.
 """
 
 
+import os
 import scipy as sp
 from scipy.stats import norm
 import h5py
@@ -147,7 +148,11 @@ def parse_sumstats(ref_dict, vld_dict, sst_file, n_subj):
 def parse_ldblk(ldblk_dir, sst_dict, chrom):
     print('... parse reference LD on chromosome %d ...' % chrom)
 
-    chr_name = ldblk_dir + '/ldblk_1kg_chr' + str(chrom) + '.hdf5'
+    if '1kg' in os.path.basename(ldblk_dir):
+        chr_name = ldblk_dir + '/ldblk_1kg_chr' + str(chrom) + '.hdf5'
+    elif 'ukbb' in os.path.basename(ldblk_dir):
+        chr_name = ldblk_dir + '/ldblk_ukbb_chr' + str(chrom) + '.hdf5'
+
     hdf_chr = h5py.File(chr_name, 'r')
     n_blk = len(hdf_chr)
     ld_blk = [sp.array(hdf_chr['blk_'+str(blk)]['ldblk']) for blk in range(1,n_blk+1)]
