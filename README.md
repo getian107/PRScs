@@ -8,6 +8,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
+**Apr 6, 2021**: Added projection of the LD matrix to its nearest non-negative definite matrix.
+
 **Mar 4, 2021**: LD reference panels constructed using the UK Biobank data are now available. 
 
 **Jan 4, 2021**: Improved the accuracy and robustness of random sampling from the generalized inverse Gaussian distribution. Prediction accuracy will probably slightly improve over previous versions.
