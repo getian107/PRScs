@@ -9,6 +9,7 @@ Parse the reference panel, summary statistics, and validation set.
 import os
 import scipy as sp
 from scipy.stats import norm
+from scipy import linalg
 import h5py
 
 
@@ -170,6 +171,11 @@ def parse_ldblk(ldblk_dir, sst_dict, chrom):
             idx_blk = range(mm,mm+len(idx))
             flip = [sst_dict['FLP'][jj] for jj in idx_blk]
             ld_blk[blk] = ld_blk[blk][sp.ix_(idx,idx)]*sp.outer(flip,flip)
+
+            _, s, v = linalg.svd(ld_blk[blk])
+            h = sp.dot(v.T, sp.dot(sp.diag(s), v))
+            ld_blk[blk] = (ld_blk[blk]+h)/2            
+
             mm += len(idx)
         else:
             ld_blk[blk] = sp.array([])
