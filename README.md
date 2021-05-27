@@ -8,7 +8,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
-**May 26, 2021**: Added suggestions for limiting the number of threads when running PRS-CS.
+**May 26, 2021**: Added suggestions for limiting the number of threads in scipy when running PRS-CS (see Computational Efficiency section below).
 
 **Apr 6, 2021**: Added projection of the LD matrix to its nearest non-negative definite matrix.
 
