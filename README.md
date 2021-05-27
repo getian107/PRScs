@@ -140,6 +140,7 @@ export MKL_NUM_THREADS=$N_THREADS
 export NUMEXPR_NUM_THREADS=$N_THREADS
 export OMP_NUM_THREADS=$N_THREADS
 ```
+For example, to use a single thread for the computation, set `N_THREADS=1`.
 
 
 ## Test Data
