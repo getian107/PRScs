@@ -14,8 +14,8 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 
  - PATH_TO_REFERENCE: Full path (including folder name) to the directory
                       that contains information on the LD reference panel (the snpinfo file and hdf5 files).
-                      If the 1000 Genomes reference panel is used, folder name would be ldblk_1kg_afr, ldblk_1kg_eas or ldblk_1kg_eur;
-                      if the UK Biobank reference panel is used, folder name would be ldblk_ukbb_afr, ldblk_ukbb_eas, ldblk_ukbb_eur or ldblk_ukbb_sas.
+                      If the 1000 Genomes reference panel is used, folder name would be ldblk_1kg_afr, ldblk_1kg_amr, ldblk_1kg_eas, ldblk_1kg_eur or ldblk_1kg_sas;
+                      if the UK Biobank reference panel is used, folder name would be ldblk_ukbb_afr, ldblk_ukbb_amr, ldblk_ukbb_eas, ldblk_ukbb_eur or ldblk_ukbb_sas.
 
  - VALIDATION_BIM_PREFIX: Full path and the prefix of the bim file for the target (validation/testing) dataset.
                           This file is used to provide a list of SNPs that are available in the target dataset.
