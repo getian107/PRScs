@@ -78,7 +78,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
      `tar -zxvf ldblk_ukbb_sas.tar.gz`
      
     For regions that don't have access to Dropbox, reference panels can be downloaded from the
-    [alternative download site](https://personal.broadinstitute.org/hhuang//public//PRS-CSx/Reference)
+    [alternative download site](https://personal.broadinstitute.org/hhuang//public//PRS-CSx/Reference).
 
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
