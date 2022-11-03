@@ -8,7 +8,7 @@ Markov Chain Monte Carlo (MCMC) sampler for polygenic prediction with continuous
 
 import scipy as sp
 from scipy import linalg 
-from scipy import random
+from numpy import random
 import gigrnd
 
 

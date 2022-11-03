@@ -9,7 +9,7 @@ Reference: L Devroye. Random variate generation for the generalized inverse Gaus
 
 
 import math
-from scipy import random
+from numpy import random
 
 
 def psi(x, alpha, lam):
