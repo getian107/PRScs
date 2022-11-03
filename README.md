@@ -8,6 +8,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
+**Nov 3, 2022**: Import random module from numpy instead of scipy.
+
 **Jun 4, 2021**: Expanded reference panels to five populations.
 
 **May 26, 2021**: Added suggestions for limiting the number of threads in scipy when running PRS-CS (see Computational Efficiency section below).
