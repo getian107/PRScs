@@ -36,7 +36,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 **Oct 20, 2019**: Added `--seed`, which can be used to seed the random number generator using a non-negative integer.
 
-**Jun 6, 2019**: Fixed a bug in `--beta_std`. If you explicitly specified `--beta_std=False`, the output was actually standardized beta (in contrast to desired per-allele beta) and we recommend redoing the analysis. If you left `--beta_std` as default or used `--beta_std=True`, the results were not affected.
+**Jun 6, 2019**: Fixed a bug in `--beta_std`. If you explicitly specified `--beta_std=False`, the output was actually standardized beta (in contrast to desired per-allele beta) and we recommend rerunning the analysis. If you left `--beta_std` as default or used `--beta_std=True`, the results were not affected.
 
 
 ## Getting Started
