@@ -127,9 +127,9 @@ When using BETA/OR + P as the input, the file must have the following format (in
 
 ```
     SNP          A1   A2   BETA      P
-    rs4970383    C    A    -0.0064   4.7780e-01
-    rs4475691    C    T    -0.0145   1.2450e-01
-    rs13302982   A    G    -0.0232   2.4290e-01
+    rs4970383    C    A    -0.0064   0.4778
+    rs4475691    C    T    -0.0145   0.1245
+    rs13302982   A    G    -0.0232   0.2429
     ...
 ```
 Or:
