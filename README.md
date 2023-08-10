@@ -10,6 +10,8 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 **Aug 10, 2023**: Added BETA + SE as a new input format (see the format of GWAS summary statistics below), which is now the recommended input data. Previsouly when using BETA + P as the input data, p-values smaller than 1e-323 are truncated, which may reduce prediction accuracy.
 
+**Aug 10, 2023**: Allowed for the output of variant-specific shrinkage estimates.
+
 **Nov 3, 2022**: Import random module from numpy instead of scipy.
 
 **Jun 4, 2021**: Expanded reference panels to five populations.
@@ -96,13 +98,32 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 ## Using PRS-CS
 
 `
-python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --beta_std=BETA_STD --seed=SEED]
+python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX --sst_file=SUM_STATS_FILE --n_gwas=GWAS_SAMPLE_SIZE --out_dir=OUTPUT_DIR [--a=PARAM_A --b=PARAM_B --phi=PARAM_PHI --n_iter=MCMC_ITERATIONS --n_burnin=MCMC_BURNIN --thin=MCMC_THINNING_FACTOR --chrom=CHROM --beta_std=BETA_STD --write_psi=WRITE_PSI --seed=SEED]
 `
  - PATH_TO_REFERENCE (required): Full path (including folder name) to the directory that contains information on the LD reference panel (the snpinfo file and hdf5 files). If the 1000 Genomes reference panel is used, folder name would be `ldblk_1kg_afr`, `ldblk_1kg_amr`, `ldblk_1kg_eas`, `ldblk_1kg_eur` or `ldblk_1kg_sas`; if the UK Biobank reference panel is used, folder name would be `ldblk_ukbb_afr`, `ldblk_ukbb_amr`, `ldblk_ukbb_eas`, `ldblk_ukbb_eur` or `ldblk_ukbb_sas`. Note that the reference panel should match the ancestry of the GWAS sample (not the target sample).
 
  - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the target (validation/testing) dataset. This file is used to provide a list of SNPs that are available in the target dataset.
 
- - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. The summary statistics file must have the following format (including the header line):
+ - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. The summary statistics file must include either BETA + SE or BETA + P. When using BETA + SE as the input, the file must have the following format (including the header line):
+
+```
+    SNP          A1   A2   BETA      SE
+    rs4970383    C    A    -0.0064   0.0090
+    rs4475691    C    T    -0.0145   0.0094
+    rs13302982   A    G    -0.0232   0.0199
+    ...
+```
+Or:
+```
+    SNP          A1   A2   OR        SE
+    rs4970383    A    C    0.9825    0.0314                 
+    rs4475691    T    C    0.9436    0.0319
+    rs13302982   A    G    1.1337    0.0543
+    ...
+```
+where SNP is the rs ID, A1 is the effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the A1 allele, SE is the standard error of the effect. Note that when OR is used, SE corresponds to the standard error of logOR.
+
+When using BETA + P as the input, the file must have the following format (including the header line):
 
 ```
     SNP          A1   A2   BETA      P
@@ -119,7 +140,7 @@ Or:
     rs13302982   A    G    1.1337    0.0209
     ...
 ```
-where SNP is the rs ID, A1 is the effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the A1 allele, P is the p-value of the effect. In fact, BETA/OR is only used to determine the direction of an association. Therefore if z-scores or even +1/-1 indicating effect directions are presented in the BETA column, the algorithm should still work properly.
+where SNP is the rs ID, A1 is the effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the A1 allele, P is the p-value of the effect. Here, a standardized effect size is calculated using the p-value while BETA/OR is only used to determine the direction of an association. Therefore if z-scores or even +1/-1 indicating effect directions are presented in the BETA column, the algorithm should still work properly.
 
  - GWAS_SAMPLE_SIZE (required): Sample size of the GWAS.
 
@@ -140,6 +161,8 @@ where SNP is the rs ID, A1 is the effect allele, A2 is the alternative allele, B
  - CHROM (optional): The chromosome(s) on which the model is fitted, separated by comma, e.g., `--chrom=1,3,5`. Parallel computation for the 22 autosomes is recommended. Default is iterating through 22 autosomes (can be time-consuming).
 
 - BETA_STD (optional): If True, return standardized posterior SNP effect sizes (i.e., effect sizes corresponding to standardized genotypes with zero mean and unit variance across subjects). If False, return per-allele posterior SNP effect sizes, calculated by properly weighting the posterior standardized effect sizes using allele frequencies estimated from the reference panel. Default is False.
+
+- WRITE_PSI (optional): If True, write variant-specific shrinkage estimates. Default is False.
 
 - SEED (optional): Non-negative integer which seeds the random number generator.
 
@@ -167,7 +190,7 @@ The test data contains GWAS summary statistics and a bim file for 1,000 SNPs on 
 An example to use the test data:
 
 `
-python PRScs.py --ref_dir=path_to_ref/ldblk_1kg_eur --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats.txt --n_gwas=200000 --chrom=22 --phi=1e-2 --out_dir=path_to_output/eur
+python PRScs.py --ref_dir=path_to_ref/ldblk_1kg_eur --bim_prefix=path_to_bim/test --sst_file=path_to_sumstats/sumstats_se.txt --n_gwas=200000 --chrom=22 --phi=1e-2 --out_dir=path_to_output/eur
 `
 
 
