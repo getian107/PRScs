@@ -7,7 +7,7 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 
 ## Version History
-
+- text in red
 **Aug 10, 2023**: Added BETA + SE as a new input format (see the format of GWAS summary statistics below), which is now the recommended input data. Previsouly when using BETA + P as the input data, p-values smaller than 1e-323 are truncated, which may reduce prediction accuracy.
 
 **Nov 3, 2022**: Import random module from numpy instead of scipy.
