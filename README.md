@@ -6,7 +6,9 @@ using GWAS summary statistics and an external LD reference panel. Details of the
 T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Regression and Continuous Shrinkage Priors. *Nature Communications*, 10:1776, 2019.
 
 
-## Recent Version History
+## Version History
+
+**Aug 10, 2023**: Added BETA + SE as a new input format (see the format of GWAS summary statistics below), which is now the recommended input data. Previsouly when using BETA + P as the input data, p-values smaller than 1e-323 are truncated, which may reduce prediction accuracy.
 
 **Nov 3, 2022**: Import random module from numpy instead of scipy.
 
