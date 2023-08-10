@@ -99,17 +99,28 @@ def parse_sumstats(ref_dict, vld_dict, sst_file, n_subj):
                 elif 'OR' in header:
                     beta = sp.log(float(ll[3]))
 
-                p = max(float(ll[4]), 1e-323)
-                beta_std = sp.sign(beta)*abs(norm.ppf(p/2.0))/n_sqrt
+                if 'SE' in header:
+                    se = float(ll[4])
+                    beta_std = beta/se/n_sqrt
+                elif 'P' in header:
+                    p = max(float(ll[4]), 1e-323)
+                    beta_std = sp.sign(beta)*abs(norm.ppf(p/2.0))/n_sqrt
+
                 sst_eff.update({snp: beta_std})
+
             elif (snp, a2, a1) in comm_snp or (snp, mapping[a2], mapping[a1]) in comm_snp:
                 if 'BETA' in header:
                     beta = float(ll[3])
                 elif 'OR' in header:
                     beta = sp.log(float(ll[3]))
 
-                p = max(float(ll[4]), 1e-323)
-                beta_std = -1*sp.sign(beta)*abs(norm.ppf(p/2.0))/n_sqrt
+                if 'SE' in header:
+                    se = float(ll[4])
+                    beta_std = -1*beta/se/n_sqrt
+                elif 'P' in header:
+                    p = max(float(ll[4]), 1e-323)
+                    beta_std = -1*sp.sign(beta)*abs(norm.ppf(p/2.0))/n_sqrt
+
                 sst_eff.update({snp: beta_std})
 
 

@@ -8,11 +8,11 @@ Markov Chain Monte Carlo (MCMC) sampler for polygenic prediction with continuous
 
 import scipy as sp
 from scipy import linalg 
-from scipy import random
+from numpy import random
 import gigrnd
 
 
-def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std, seed):
+def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std, write_psi, seed):
     print('... MCMC ...')
 
     # seed
@@ -91,6 +91,17 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
     with open(eff_file, 'w') as ff:
         for snp, bp, a1, a2, beta in zip(sst_dict['SNP'], sst_dict['BP'], sst_dict['A1'], sst_dict['A2'], beta_est):
             ff.write('%d\t%s\t%d\t%s\t%s\t%.6e\n' % (chrom, snp, bp, a1, a2, beta))
+
+    # write posterior estimates of psi
+    if write_psi == 'True':
+        if phi_updt == True:
+            psi_file = out_dir + '_pst_psi_a%d_b%.1f_phiauto_chr%d.txt' % (a, b, chrom)
+        else:
+            psi_file = out_dir + '_pst_psi_a%d_b%.1f_phi%1.0e_chr%d.txt' % (a, b, phi, chrom)
+
+        with open(psi_file, 'w') as ff:
+            for snp, psi in zip(sst_dict['SNP'], psi_est):
+                ff.write('%s\t%.6e\n' % (snp, psi))
 
     # print estimated phi
     if phi_updt == True:
