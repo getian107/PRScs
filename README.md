@@ -104,7 +104,7 @@ python PRScs.py --ref_dir=PATH_TO_REFERENCE --bim_prefix=VALIDATION_BIM_PREFIX -
 
  - VALIDATION_BIM_PREFIX (required): Full path and the prefix of the bim file for the target (validation/testing) dataset. This file is used to provide a list of SNPs that are available in the target dataset.
 
- - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. The summary statistics file must include either BETA + SE or BETA + P. When using BETA + SE as the input, the file must have the following format (including the header line):
+ - SUM_STATS_FILE (required): Full path and the file name of the GWAS summary statistics. The summary statistics file must include either BETA/OR + SE or BETA/OR + P. When using BETA/OR + SE as the input, the file must have the following format (including the header line):
 
 ```
     SNP          A1   A2   BETA      SE
@@ -123,7 +123,7 @@ Or:
 ```
 where SNP is the rs ID, A1 is the effect allele, A2 is the alternative allele, BETA/OR is the effect/odds ratio of the A1 allele, SE is the standard error of the effect. Note that when OR is used, SE corresponds to the standard error of logOR.
 
-When using BETA + P as the input, the file must have the following format (including the header line):
+When using BETA/OR + P as the input, the file must have the following format (including the header line):
 
 ```
     SNP          A1   A2   BETA      P
