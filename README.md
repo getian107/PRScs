@@ -8,6 +8,10 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
 
 ## Recent Version History
 
+**Nov 3, 2022**: Import random module from numpy instead of scipy.
+
+**Jun 4, 2021**: Expanded reference panels to five populations.
+
 **May 26, 2021**: Added suggestions for limiting the number of threads in scipy when running PRS-CS (see Computational Efficiency section below).
 
 **Apr 6, 2021**: Added projection of the LD matrix to its nearest non-negative definite matrix.
@@ -74,6 +78,9 @@ T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Reg
     
      [SAS reference](https://www.dropbox.com/s/nto6gdajq8qfhh0/ldblk_ukbb_sas.tar.gz?dl=0 "SAS reference") (~7.37G);
      `tar -zxvf ldblk_ukbb_sas.tar.gz`
+     
+    For regions that don't have access to Dropbox, reference panels can be downloaded from the
+    [alternative download site](https://personal.broadinstitute.org/hhuang//public//PRS-CSx/Reference).
 
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
  
