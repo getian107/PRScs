@@ -6,7 +6,7 @@ using GWAS summary statistics and an external LD reference panel.
 - Details of the development and evaluation of PRS-CS are described in: \
   T Ge, CY Chen, Y Ni, YCA Feng, JW Smoller. Polygenic Prediction via Bayesian Regression and Continuous Shrinkage Priors. *Nature Communications*, 10:1776, 2019.
 
-- An extension of PRS-CS to PRS-CSx (https://github.com/getian107/PRScsx) for cross-population polygenic prediction is described in: \
+- An extension of PRS-CS to PRS-CSx for cross-population polygenic prediction is available at https://github.com/getian107/PRScsx and described in: \
   Y Ruan, YF Lin, YCA Feng, CY Chen, M Lam, Z Guo, Stanley Global Asia Initiatives, L He, A Sawa, AR Martin, S Qin, H Huang, T Ge. Improving polygenic prediction in ancestrally diverse populations. *Nature Genetics*, 54:573-580, 2022.
 
 - A review of the methods and best practices for cross-ancestry polygenic prediction is available at: \
