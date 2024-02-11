@@ -7,6 +7,7 @@ Parse the reference panel, summary statistics, and validation set.
 
 
 import os
+import numpy as np
 import scipy as sp
 from scipy.stats import norm
 from scipy import linalg
@@ -83,7 +84,7 @@ def parse_sumstats(ref_dict, vld_dict, sst_file, n_subj):
     print('... %d common SNPs in the reference, sumstats, and validation set ...' % len(comm_snp))
 
 
-    n_sqrt = sp.sqrt(n_subj)
+    n_sqrt = np.sqrt(n_subj)
     sst_eff = {}
     with open(sst_file) as ff:
         header = (next(ff).strip()).split()
@@ -167,7 +168,7 @@ def parse_ldblk(ldblk_dir, sst_dict, chrom):
 
     hdf_chr = h5py.File(chr_name, 'r')
     n_blk = len(hdf_chr)
-    ld_blk = [sp.array(hdf_chr['blk_'+str(blk)]['ldblk']) for blk in range(1,n_blk+1)]
+    ld_blk = [np.array(hdf_chr['blk_'+str(blk)]['ldblk']) for blk in range(1,n_blk+1)]
 
     snp_blk = []
     for blk in range(1,n_blk+1):
@@ -181,15 +182,15 @@ def parse_ldblk(ldblk_dir, sst_dict, chrom):
         if idx != []:
             idx_blk = range(mm,mm+len(idx))
             flip = [sst_dict['FLP'][jj] for jj in idx_blk]
-            ld_blk[blk] = ld_blk[blk][sp.ix_(idx,idx)]*sp.outer(flip,flip)
+            ld_blk[blk] = ld_blk[blk][np.ix_(idx,idx)]*np.outer(flip,flip)
 
             _, s, v = linalg.svd(ld_blk[blk])
-            h = sp.dot(v.T, sp.dot(sp.diag(s), v))
+            h = np.dot(v.T, np.dot(np.diag(s), v))
             ld_blk[blk] = (ld_blk[blk]+h)/2            
 
             mm += len(idx)
         else:
-            ld_blk[blk] = sp.array([])
+            ld_blk[blk] = np.array([])
 
     return ld_blk, blk_size
 
