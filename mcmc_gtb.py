@@ -6,6 +6,7 @@ Markov Chain Monte Carlo (MCMC) sampler for polygenic prediction with continuous
 """
 
 
+import numpy as np
 import scipy as sp
 from scipy import linalg 
 from numpy import random
@@ -20,23 +21,23 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
         random.seed(seed)
 
     # derived stats
-    beta_mrg = sp.array(sst_dict['BETA'], ndmin=2).T
-    maf = sp.array(sst_dict['MAF'], ndmin=2).T
+    beta_mrg = np.array(sst_dict['BETA'], ndmin=2).T
+    maf = np.array(sst_dict['MAF'], ndmin=2).T
     n_pst = (n_iter-n_burnin)/thin
     p = len(sst_dict['SNP'])
     n_blk = len(ld_blk)
 
     # initialization
-    beta = sp.zeros((p,1))
-    psi = sp.ones((p,1))
+    beta = np.zeros((p,1))
+    psi = np.ones((p,1))
     sigma = 1.0
     if phi == None:
         phi = 1.0; phi_updt = True
     else:
         phi_updt = False
 
-    beta_est = sp.zeros((p,1))
-    psi_est = sp.zeros((p,1))
+    beta_est = np.zeros((p,1))
+    psi_est = np.zeros((p,1))
     sigma_est = 0.0
     phi_est = 0.0
 
@@ -51,11 +52,11 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
                 continue
             else:
                 idx_blk = range(mm,mm+blk_size[kk])
-                dinvt = ld_blk[kk]+sp.diag(1.0/psi[idx_blk].T[0])
+                dinvt = ld_blk[kk]+np.diag(1.0/psi[idx_blk].T[0])
                 dinvt_chol = linalg.cholesky(dinvt)
-                beta_tmp = linalg.solve_triangular(dinvt_chol, beta_mrg[idx_blk], trans='T') + sp.sqrt(sigma/n)*random.randn(len(idx_blk),1)
+                beta_tmp = linalg.solve_triangular(dinvt_chol, beta_mrg[idx_blk], trans='T') + np.sqrt(sigma/n)*random.randn(len(idx_blk),1)
                 beta[idx_blk] = linalg.solve_triangular(dinvt_chol, beta_tmp, trans='N')
-                quad += sp.dot(sp.dot(beta[idx_blk].T, dinvt), beta[idx_blk])
+                quad += np.dot(np.dot(beta[idx_blk].T, dinvt), beta[idx_blk])
                 mm += blk_size[kk]
 
         err = max(n/2.0*(1.0-2.0*sum(beta*beta_mrg)+quad), n/2.0*sum(beta**2/psi))
@@ -80,7 +81,7 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
 
     # convert standardized beta to per-allele beta
     if beta_std == 'False':
-        beta_est /= sp.sqrt(2.0*maf*(1.0-maf))
+        beta_est /= np.sqrt(2.0*maf*(1.0-maf))
 
     # write posterior effect sizes
     if phi_updt == True:
