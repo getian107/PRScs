@@ -174,7 +174,7 @@ where SNP is the rs ID, A1 is the effect allele, A2 is the alternative allele, B
 
 - WRITE_PSI (optional): If True, write variant-specific shrinkage estimates. Default is False.
 
-- WRITE_POSTERIOR_SAMPLES (optional): If True, write all posterior samples of beta after thinning. Default is False.
+- WRITE_POSTERIOR_SAMPLES (optional): If True, write all posterior samples of SNP effect sizes after thinning. Default is False.
 
 - SEED (optional): Non-negative integer which seeds the random number generator.
 
