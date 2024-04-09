@@ -12,7 +12,7 @@ from numpy import random
 import gigrnd
 
 
-def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std, write_psi, seed):
+def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std, write_psi, write_pst, seed):
     print('... MCMC ...')
 
     # seed
@@ -22,7 +22,7 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
     # derived stats
     beta_mrg = sp.array(sst_dict['BETA'], ndmin=2).T
     maf = sp.array(sst_dict['MAF'], ndmin=2).T
-    n_pst = (n_iter-n_burnin)/thin
+    n_pst = int((n_iter-n_burnin)/thin)
     p = len(sst_dict['SNP'])
     n_blk = len(ld_blk)
 
@@ -30,10 +30,14 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
     beta = sp.zeros((p,1))
     psi = sp.ones((p,1))
     sigma = 1.0
+    
     if phi == None:
         phi = 1.0; phi_updt = True
     else:
         phi_updt = False
+
+    if write_pst == 'TRUE':
+        beta_pst = sp.zeros((p,n_pst))
 
     beta_est = sp.zeros((p,1))
     psi_est = sp.zeros((p,1))
@@ -41,6 +45,7 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
     phi_est = 0.0
 
     # MCMC
+    pp = 0
     for itr in range(1,n_iter+1):
         if itr % 100 == 0:
             print('--- iter-' + str(itr) + ' ---')
@@ -78,9 +83,17 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
             sigma_est = sigma_est + sigma/n_pst
             phi_est = phi_est + phi/n_pst
 
+            if write_pst == 'TRUE':
+                beta_pst[:,[pp]] = beta
+                pp += 1
+
     # convert standardized beta to per-allele beta
-    if beta_std == 'False':
+    if beta_std == 'FALSE':
         beta_est /= sp.sqrt(2.0*maf*(1.0-maf))
+
+        if write_pst == 'TRUE':
+            beta_pst /= sp.sqrt(2.0*maf*(1.0-maf))
+
 
     # write posterior effect sizes
     if phi_updt == True:
@@ -89,11 +102,15 @@ def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom
         eff_file = out_dir + '_pst_eff_a%d_b%.1f_phi%1.0e_chr%d.txt' % (a, b, phi, chrom)
 
     with open(eff_file, 'w') as ff:
-        for snp, bp, a1, a2, beta in zip(sst_dict['SNP'], sst_dict['BP'], sst_dict['A1'], sst_dict['A2'], beta_est):
-            ff.write('%d\t%s\t%d\t%s\t%s\t%.6e\n' % (chrom, snp, bp, a1, a2, beta))
+        if write_pst == 'TRUE':
+            for snp, bp, a1, a2, beta in zip(sst_dict['SNP'], sst_dict['BP'], sst_dict['A1'], sst_dict['A2'], beta_pst):
+                ff.write(('%d\t%s\t%d\t%s\t%s' + '\t%.6e'*n_pst + '\n') % (chrom, snp, bp, a1, a2, *beta))
+        else:
+            for snp, bp, a1, a2, beta in zip(sst_dict['SNP'], sst_dict['BP'], sst_dict['A1'], sst_dict['A2'], beta_est):
+                ff.write('%d\t%s\t%d\t%s\t%s\t%.6e\n' % (chrom, snp, bp, a1, a2, beta))
 
     # write posterior estimates of psi
-    if write_psi == 'True':
+    if write_psi == 'TRUE':
         if phi_updt == True:
             psi_file = out_dir + '_pst_psi_a%d_b%.1f_phiauto_chr%d.txt' % (a, b, chrom)
         else:
