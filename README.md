@@ -15,7 +15,7 @@ using GWAS summary statistics and an external LD reference panel.
 
 ## Version History
 
-**May 14, 2024**: Replacing some scipy functions with numpy due to changes in the latest scipy version.
+**May 14, 2024**: Replaced some scipy functions with numpy due to changes in the latest scipy version.
 
 **Apr 9, 2024**: Allowed for the output of all posterior samples, which can be used to estimate the uncertainty of individualized PRS.
 
