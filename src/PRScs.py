@@ -20,9 +20,9 @@ import os
 import sys
 import getopt
 
-import parse_genet
-import mcmc_gtb
-import gigrnd
+import src.parse_genet as parse_genet
+import src.mcmc_gtb as mcmc_gtb
+import src.gigrnd as gigrnd
 
 
 def parse_param():
