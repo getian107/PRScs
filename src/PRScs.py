@@ -20,18 +20,19 @@ import os
 import sys
 import getopt
 
-import src.parse_genet as parse_genet
-import src.mcmc_gtb as mcmc_gtb
-import src.gigrnd as gigrnd
+import parse_genet as parse_genet
+import mcmc_gtb as mcmc_gtb
+import gigrnd as gigrnd
 
 
 def parse_param():
     long_opts_list = ['ref_dir=', 'bim_prefix=', 'sst_file=', 'a=', 'b=', 'phi=', 'n_gwas=',
-                      'n_iter=', 'n_burnin=', 'thin=', 'out_dir=', 'chrom=', 'beta_std=', 'write_psi=', 'write_pst=', 'seed=', 'help']
+                      'n_iter=', 'n_burnin=', 'thin=', 'out_dir=', 'chrom=', 'beta_std=', 'write_psi=', 'write_pst=', 'seed=', 'help', 
+                      'info_file=']
 
     param_dict = {'ref_dir': None, 'bim_prefix': None, 'sst_file': None, 'a': 1, 'b': 0.5, 'phi': None, 'n_gwas': None,
                   'n_iter': 1000, 'n_burnin': 500, 'thin': 5, 'out_dir': None, 'chrom': range(1,23),
-                  'beta_std': 'FALSE', 'write_psi': 'FALSE', 'write_pst': 'FALSE', 'seed': None}
+                  'beta_std': 'FALSE', 'write_psi': 'FALSE', 'write_pst': 'FALSE', 'seed': None, 'info_file': None}
 
     print('\n')
 
@@ -63,6 +64,7 @@ def parse_param():
             elif opt == "--write_psi": param_dict['write_psi'] = arg.upper()
             elif opt == "--write_pst": param_dict['write_pst'] = arg.upper()
             elif opt == "--seed": param_dict['seed'] = int(arg)
+            elif opt == "--info_file": param_dict['info_file'] = arg
     else:
         print(__doc__)
         sys.exit(0)
@@ -92,15 +94,22 @@ def parse_param():
 
 def main():
     param_dict = parse_param()
-
+    info_file = param_dict["info_file"]
+    
     for chrom in param_dict['chrom']:
         print('##### process chromosome %d #####' % int(chrom))
 
-        if '1kg' in os.path.basename(param_dict['ref_dir']):
-            ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/snpinfo_1kg_hm3', int(chrom))
-        elif 'ukbb' in os.path.basename(param_dict['ref_dir']):
-            ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/snpinfo_ukbb_hm3', int(chrom))
-
+        
+        if info_file is None:
+            if '1kg' in os.path.basename(param_dict['ref_dir']):
+                info_file = param_dict['ref_dir'] + '/snpinfo_1kg_hm3'
+            
+            elif 'ukbb' in os.path.basename(param_dict['ref_dir']):
+                info_file = param_dict['ref_dir'] + '/snpinfo_ukbb_hm3'
+                # ref_dict = parse_genet.parse_ref(param_dict['ref_dir'] + '/snpinfo_ukbb_hm3', int(chrom))
+        
+        ref_dict = parse_genet.parse_ref(info_file, int(chrom))
+        
         vld_dict = parse_genet.parse_bim(param_dict['bim_prefix'], int(chrom))
 
         sst_dict = parse_genet.parse_sumstats(ref_dict, vld_dict, param_dict['sst_file'], param_dict['n_gwas'])
