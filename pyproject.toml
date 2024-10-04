@@ -7,12 +7,18 @@ PRScs = "PRScs:main"
 
 [project]
 name = "prscs"
-version = "1.1.0"
+version = "1.1.2"
 authors = [
       {name = "Tian Ge", email="tge1@mgh.harvard.edu"},
 ]
+
 readme = "README.md"
 license = {file = "LICENSE"}
+dependencies = [
+  "scipy>1.11",
+  "h5py>3.11",
+  "numpy",
+  ]
 
 [project.urls]
 Homepage = "https://github.com/getian107/PRScs"
