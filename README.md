@@ -188,7 +188,7 @@ PRS-CS writes posterior SNP effect size estimates for each chromosome to the use
 
 ## Computational Efficiency
 
-PRS-CS relies on scipy packages, which automatically use all available cores on a compute node. This can be problematic when running PRS-CS on a compute cluster; PRS-CS jobs may interfere with other jobs running on the same node, reducing computational efficiency. To resolve this issue, including the following code in the script to specify the number of threads in scipy:
+PRS-CS relies on numpy packages, which automatically use all available cores on a compute node. This can be problematic when running PRS-CS on a compute cluster; PRS-CS jobs may interfere with other jobs running on the same node, reducing computational efficiency. To resolve this issue, including the following code in the script to specify the number of threads in scipy:
 
 ```
 export MKL_NUM_THREADS=$N_THREADS
