@@ -9,7 +9,7 @@ Markov Chain Monte Carlo (MCMC) sampler for polygenic prediction with continuous
 import numpy as np
 from scipy import linalg 
 from numpy import random
-import gigrnd
+import gigrnd as gigrnd
 
 
 def mcmc(a, b, phi, sst_dict, n, ld_blk, blk_size, n_iter, n_burnin, thin, chrom, out_dir, beta_std, write_psi, write_pst, seed):
