@@ -99,7 +99,11 @@ using GWAS summary statistics and an external LD reference panel.
     [alternative download site](https://personal.broadinstitute.org/hhuang//public//PRS-CSx/Reference).
 
 - PRScs requires Python packages **scipy** (https://www.scipy.org/) and **h5py** (https://www.h5py.org/) installed.
- 
+
+> [!IMPORTANT]
+> The program has not been tested with the latest Python, NumPy, and SciPy versions and may have compatibility issues.
+> We currently recommend using NumPy 1.x. A compatible environment would be, for example, Python 3.11 or 3.12 with NumPy 1.26, SciPy 1.11, and h5py 3.10.
+
 - Once Python and its dependencies have been installed, running
 
     `./PRScs.py --help` or `./PRScs.py -h`
